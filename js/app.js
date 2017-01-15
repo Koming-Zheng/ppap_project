@@ -179,7 +179,7 @@ $(function () {
                     overflow: "hidden",
                     boxSizing: "border-box"
                 });
-                fightFuc.fightText.html("点红线包围区域<br>开始GAME<br>本大叔就跳舞给你看！");
+                fightFuc.fightText.html("点红线包围区域<br>开始GAME<br>点击提示的方向键，本大叔就跳舞给你看！");
                 // clearInterval(timer1);
                 // $('body').css({backgroundColor:"black"})
                 ctlKey.init();
