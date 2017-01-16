@@ -10,7 +10,7 @@ var danceArray = (function () {
     for (var i = 1; i <= 49; i++) {
 
         // arrIndex = Math.round(Math.random() * m - n);
-        arrIndex = _.random(0,3);
+        arrIndex = _.random(n,m);
         danceList.push(orientationArr[arrIndex]);
 
     }
