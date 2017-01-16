@@ -183,6 +183,9 @@ $(function () {
                 // clearInterval(timer1);
                 // $('body').css({backgroundColor:"black"})
                 ctlKey.init();
+
+
+
                 console.log("\n 进入");
             }
         });
@@ -193,7 +196,7 @@ $(function () {
         })
 
 
-    }, 3000);
+    }, 1000);
 
     var timeTotal = function () {
 
@@ -221,9 +224,13 @@ $(function () {
         ctlKey.rightKey.on('tap', {orien: "R"}, moveHandle);
         fightFuc.fightText.html("GAME BEGIN");
 
-        bgm.play();
+        bgm.play("M");
 
-        msgCtl.show()
+        msgCtl.show();
+
+        bgm.bmgM_end.get(0).play();
+        bgm.bmgM_end.get(0).muted = true;
+
 
     }
 
@@ -267,7 +274,7 @@ $(function () {
                         ctlKey.ctlAre.hide()
                     }
                 })
-            }, 2000);
+            }, 1000);
 
 
         }
@@ -294,12 +301,15 @@ $(function () {
                         // }});
 
                         var scoresText = scoresFuc("用时：" + (endTime - startTime) / 1000 + "秒");
-                        JT.fromTo(scoresText, 0.3, {top: 55}, {top: 50, ease: JT.Quart.Out})
+                        JT.fromTo(scoresText, 0.3, {top: 55}, {top: 50, ease: JT.Quart.Out});
+
 
                     }
                 })
             }
-        })
+        });
+        bgm.play("end");
+        bgm.bmgM_end.get(0).muted = false
     }
 
     console.log("%c 会美术就是好，想画什么画什么。", "color:orange", "\n \n 致敬！");

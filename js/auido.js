@@ -6,13 +6,24 @@ var bgm = (function () {
     var m;
     var bgm = $('<audio src="audio/ppap_bgm.mp3" ></audio>', {preload: "preload", loop: "loop"})
         .appendTo("body");
-    var bgmM = $('<audio src="audio/ppap_bgm_M.mp3" ></audio>', {preload: "preload", loop: "loop"})
+    var bgmM = $('<audio src="audio/ppap_bgm_M_loop.mp3" ></audio>', {preload: "preload", loop: "loop"})
+        .appendTo("body");
+    var bmgM_start = $('<audio src="audio/ppap_bgm_M_start.mp3" ></audio>', {preload: "preload"})
+        .appendTo("body");
+
+    var bmgM_end = $('<audio src="audio/ppap_bgm_M_end.mp3" ></audio>', {preload: "preload"})
         .appendTo("body");
 
 
     function selectBgm(bgmType) {
         if (bgmType == "M") {
             return bgmM
+        }
+        else if(bgmType == "start") {
+            return bmgM_start
+        }
+        else if(bgmType == "end") {
+            return bmgM_end
         }
         else {
             return bgm
@@ -23,6 +34,7 @@ var bgm = (function () {
         play: function (type) {
             m = selectBgm(type).get(0);
             m.play();
+
             if (m.paused) {
                 autoPlayAudio1.init(function () {
                     m.play();
@@ -36,7 +48,9 @@ var bgm = (function () {
             m.pause();
         },
         bgm: bgm,
-        bgmM: bgmM
+        bgmM: bgmM,
+        bmgM_start:bmgM_start,
+        bmgM_end:bmgM_end,
     }
 
 }());
