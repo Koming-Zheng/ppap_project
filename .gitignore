@@ -183,7 +183,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# 配置文件
+
+config.php
+
 .gitignore
 
-# 配置文件
-config.php
+
