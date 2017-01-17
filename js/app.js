@@ -24,10 +24,10 @@ var msgCtl = (function () {
     var msg = $('<p id="msg">点错消除连击！错消除连击！错消除连击！重要的事情说三遍。</p>');
 
     return {
-        show:function () {
+        show: function () {
             htmlString.prepend(msg)
         },
-        hide:function () {
+        hide: function () {
             msg.hide();
         }
     }
@@ -185,7 +185,6 @@ $(function () {
                 ctlKey.init();
 
 
-
                 console.log("\n 进入");
             }
         });
@@ -282,6 +281,17 @@ $(function () {
     }
 
     function gameEndFuc() {
+        $.post("save.php", {
+            openid: $userinfo.openid,
+            nickname: $userinfo.nickname,
+            headimgurl: $userinfo.headimgurl,
+            point: totalFight,
+            time_interval: endTime - startTime
+        }, function (data, status, xhr) {
+            // alert(JSON.stringify(data))
+
+        });
+
         JT.to(sp, 0.4, {
             rotationY: 0, ease: JT.Quart.Out, onUpdate: function () {
                 sp.updateT();
@@ -301,7 +311,11 @@ $(function () {
                         // }});
 
                         var scoresText = scoresFuc("用时：" + (endTime - startTime) / 1000 + "秒");
-                        JT.fromTo(scoresText, 0.3, {top: 55}, {top: 50, ease: JT.Quart.Out});
+                        JT.fromTo(scoresText, 0.3, {top: 55}, {
+                            top: 50, ease: JT.Quart.Out, onEnd: function () {
+                                rankingList()
+                            }
+                        });
 
 
                     }
@@ -324,6 +338,14 @@ function scoresFuc(time) {
     return scores
 
 
+}
+
+function rankingList() {
+    $('<a>', {
+        href: "ranking_list.html",
+        text: "全民PPAP排行榜"
+    }).appendTo('body')
+        .wrap('<div style="position: absolute; top: 60%; width: 100%; text-align: center; font-size: 32px"></div>');
 }
 // function fightFuc(num) {
 //     var textHtml ="";

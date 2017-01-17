@@ -1,4 +1,29 @@
-<script>var $userinfo = {} </script>
+<?php
+
+include("./auth.php");
+
+$scope = "snsapi_userinfo";
+$we_obj = new Wechat($options);
+$json = $we_obj->getOauthAccessToken();
+
+
+if ($json !== false){
+    $userinfo = $we_obj->getOauthUserinfo($json['access_token'], $json['openid']);
+
+    $userinfo = json_encode($userinfo);
+?>
+<script>var $userinfo = <?php echo $userinfo; ?></script>
+<script>console.log($userinfo)</script>
+<?php
+} else {
+
+    $url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $oauth_url = $we_obj->getOauthRedirect($url, "", $scope);
+    header('Location: ' . $oauth_url);
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +42,15 @@
             shareLink: location.href.split("?")[0],
             shareTitle: '没玩没成绩',
             shareDesc: '全民PPAP',
-            data: {
-                appUrl: location.href.split("#")[0]
+            data:{
+                appUrl:location.href.split("#")[0]
             },
-            serverUrl: 'http://display.6edigital.com/wechat_6e/wxconfig.php'
+            serverUrl:'http://display.6edigital.com/wechat_6e/wxconfig.php'
         };
 
     </script>
 </head>
 <body>
-<div style="position: absolute;top:0;left: 0;right: 0;bottom: 0; background:#fff url(./images/share.jpg) center; z-index: 999;"></div>
 <div id="mian"></div>
 <script src="//res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 <script src="js/wechat.js"></script>
@@ -35,7 +59,7 @@
 <script src="js/ctlKey.js"></script>
 <script src="js/app.js"></script>
 <script>
-//    bgm.play("start");
+    bgm.play("start");
     wechat.init(options);
 </script>
 </body>

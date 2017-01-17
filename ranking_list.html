@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全民 PPAP 排行榜</title>
+    <meta name="viewport" content="width=640, user-scalable=no">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ol {
+            margin: 0;
+        }
+
+        ol > li {
+            margin: 16px 0;
+
+            border-bottom: 1px dashed black;
+        }
+
+        ol > li:last-child {
+            border-bottom: none;
+        }
+
+        ol > li:nth-child(even) {
+            background: url("https://ss0.bdstatic.com/-0U0bnSm1A5BphGlnYG/tam-ogel/fd82365368c2237fbb30c349eff23d34_121_121.jpg") right no-repeat;
+        }
+
+        ol > li:nth-child(odd):after {
+            /*display: inline-block;*/
+            margin-right: 30px;
+            content: "🖋";
+            font-size: 60px;
+            float: right;
+        }
+
+        ul {
+            display: inline-block;
+        }
+
+
+    </style>
+</head>
+<body>
+<script src="//wximg.qq.com/wxp/libs/wxmoment/0.0.4/wxmoment.min.js"></script>
+<script>
+    var _ = require('./lib/underscore');
+
+    $.post("find.php", {}, function (data, status, xhr) {
+        var pNumber = data.ranks.length;
+
+
+        var listDom = $('<ol>');
+
+        _.each(data.ranks, function (element, index, list) {
+            var itemDom = $('<li>');
+            var p = $('<ul>', {html: '<li>' + element.nickname + '</li><li>最高连击：' + element.point + '次</li><li>最佳时间：' + element.time_interval / 1000 + '秒</li>'})
+
+            itemDom.append('<img  width="80" src="' + element.headimgurl + '" alt="">');
+
+            itemDom.append(p);
+
+            listDom.append(itemDom);
+
+        });
+
+        listDom.appendTo('body');
+
+    })
+</script>
+</body>
+</html>

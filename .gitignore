@@ -184,3 +184,6 @@ $RECYCLE.BIN/
 *.lnk
 
 .gitignore
+
+# 配置文件
+config.php
