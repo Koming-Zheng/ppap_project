@@ -184,9 +184,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # 配置文件
-
 config.php
 
 .gitignore
 
 
+.idea/inspectionProfiles/

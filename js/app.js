@@ -35,6 +35,12 @@ var msgCtl = (function () {
 })();
 
 $(function () {
+
+    document.addEventListener('touchmove', eventDefault,false);
+    function eventDefault(e) {
+        e.preventDefault();
+    }
+
     var startTime;
     var endTime;
     var totalFight = 0;
@@ -323,7 +329,9 @@ $(function () {
             }
         });
         bgm.play("end");
-        bgm.bmgM_end.get(0).muted = false
+        bgm.bmgM_end.get(0).muted = false;
+        // options.shareTitle="";
+        // wechat.reset(options)
     }
 
     console.log("%c 会美术就是好，想画什么画什么。", "color:orange", "\n \n 致敬！");
@@ -378,14 +386,12 @@ var fightFuc = (function () {
 
 
     }
+
+
 })();
 
 function prefixInteger(num, length) {
     return (Array(length).join('0') + num).slice(-length);
 }
 
-// document.addEventListener('touchmove',moveHandle,false);
-// function moveHandle(e) {
-//     e.preventDefault();
-//     e.stopPropagation();
-// }
+
